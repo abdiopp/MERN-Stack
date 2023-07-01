@@ -16,11 +16,16 @@ const getTodos = asyncHandler(async (req, res) => {
 const setTodo = asyncHandler(async (req, res) => {
     if (!req.body.title) {
         res.status(400)
-        throw new Error('Please add text')
+        throw new Error('Please add title')
+    }
+    if (!req.body.description) {
+        res.status(400)
+        throw new Error('Please add description')
     }
 
     const todo = await Todo.create({
-        title: req.body.title
+        title: req.body.title,
+        description: req.body.description
     })
 
     res.json(todo)
